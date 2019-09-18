@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 900,
+    height: 380,
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -85,30 +85,34 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Item One" {...a11yProps(0)}/>
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
+        <Tab label="All Heroes" {...a11yProps(0)}/>
+        <Tab label="Str above 60" {...a11yProps(1)} />
+        <Tab label="Top 10 Power" {...a11yProps(2)} />
+        <Tab label="Speed above 60 and Int below 60" {...a11yProps(3)} />
+        <Tab label="Top 10 Int - Humans" {...a11yProps(4)} />
+        <Tab label="Top 10 Speed - Non-Human" {...a11yProps(5)} />
+        <Tab label="Non-Human Women with Str above 80" {...a11yProps(6)} />
       </Tabs>
-      <TabPanel value={value} index={0}>
-        <DataTable heroes={heroes}/>
+      <TabPanel value={value} index={0} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={1}/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <DataTable />
+      <TabPanel value={value} index={1} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={2}/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        <DataTable />
+      <TabPanel value={value} index={2} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={3}/>
       </TabPanel>
-      <TabPanel value={value} index={3}>
-        <DataTable />
+      <TabPanel value={value} index={3} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={4}/>
       </TabPanel>
-      <TabPanel value={value} index={4}>
-        <DataTable />
+      <TabPanel value={value} index={4} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={5}/>
       </TabPanel>
-      <TabPanel value={value} index={5}>
-        <DataTable />
+      <TabPanel value={value} index={5} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={6}/>
+      </TabPanel>
+      <TabPanel value={value} index={6} style={ {maxWidth: 800, maxHeight: 1200} }>
+        <DataTable heroes={heroes} type={7}/>
       </TabPanel>
     </div>
   );

@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
   { id: 'id', label: 'ID', maxWidth: 10 },
+  { id: 'img', label: 'Image', maxWidth: 40 },
   { id: 'name', label: 'Full Name', maxWidth: 40 },
   { id: 'alias', label: 'Alias', maxWidth: 40 },
   { id: 'race', label: 'Race', maxWidth: 40 },
@@ -69,7 +70,7 @@ export default function DataTable({heroes, type}) {
   }
 
   function formatRow(hero){
-    return {id: hero.id, name: hero.biography.fullName, alias: hero.name,
+    return {id: hero.id, img:<img src= {hero.images.xs}></img>, name: hero.biography.fullName, alias: hero.name,
       race: hero.race, gender: hero.gender, strength: hero.strength, power: hero.power, int: hero.intelligence, speed: hero.speed}
   }
 

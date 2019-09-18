@@ -99,7 +99,7 @@ export default function DataTable({heroes, type}) {
   }
 
   const top10intHuman = () => {
-    return heroes ? heroes.sort((hero1,hero2) => (hero2.intelligence > hero1.intelligence) ? 1 : ((hero1.power > hero2.power) ? -1 : 0))
+    return heroes ? heroes.sort((hero1,hero2) => (hero2.intelligence > hero1.intelligence) ? 1 : ((hero1.intelligence > hero2.intelligence) ? -1 : 0))
     .filter(hero => (hero.race === 'Human')).map(hero =>
       formatRow(hero)
     ).slice(0, 10) : [];

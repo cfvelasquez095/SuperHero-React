@@ -9,7 +9,7 @@ const data = require('./public/heroes.json')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/heroInfo', (req, res) => {
   res.json(data);
 });
 

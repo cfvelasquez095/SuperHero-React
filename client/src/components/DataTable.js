@@ -46,10 +46,6 @@ function createData(id, name, alias, strength, power, int, speed) {
   return { id, name, alias, strength, power, int, speed };
 }
 
-const rows = [
-  createData(70, 'Bruce Wayne', 'Batman', 26, 47, 100, 27)
-];
-
 const useStyles = makeStyles({
   root: {
     width: '179%',
@@ -74,6 +70,30 @@ export default function DataTable({heroes}) {
     setPage(0);
   }
 
+  const rows = [
+    createData(70, 'Bruce Wayne', 'Batman', 26, 47, 100, 27)
+  ];
+
+  function generateHeroes(){
+    return (
+    <TableBody>
+    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+      return (
+        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+          {columns.map(column => {
+            const value = row[column.id];
+            return (
+              <TableCell key={column.id} align={column.align}>
+                {column.format && typeof value === 'number' ? column.format(value) : value}
+              </TableCell>
+            );
+          })}
+        </TableRow>
+      );
+    })}
+    </TableBody>)
+  }
+
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
@@ -91,22 +111,7 @@ export default function DataTable({heroes}) {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map(column => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
+          {generateHeroes()}
         </Table>
       </div>
       <TablePagination

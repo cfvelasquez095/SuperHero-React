@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import DataTable from './DataTable';
+import axios from 'axios';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,8 +56,8 @@ export default function VerticalTabs() {
   const [heroes, setHeroes] = React.useState([]);
 
   async function getResponse(){
-    const response = await fetch('/');
-    const body = await response.json();
+    const response = await axios.get('/heroInfo', { crossdomain: true });
+    const body = response.data;
     if(response.status !== 200) throw Error(body.message);
 
     return body;
@@ -65,10 +66,10 @@ export default function VerticalTabs() {
   React.useEffect(() => {
     getResponse()
       .then(res => {
-        const someData = res.data;
-        setHeroes([...heroes, someData]);
+        const someData = res;
+        setHeroes([...heroes, ...someData]);
       })
-  });
+  }, []);
 
   function handleChange(event, newValue) {
     setValue(newValue);
@@ -84,7 +85,7 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Item One" {...a11yProps(0)} />
+        <Tab label="Item One" {...a11yProps(0)}/>
         <Tab label="Item Two" {...a11yProps(1)} />
         <Tab label="Item Three" {...a11yProps(2)} />
         <Tab label="Item Four" {...a11yProps(3)} />
@@ -92,7 +93,7 @@ export default function VerticalTabs() {
         <Tab label="Item Six" {...a11yProps(5)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <DataTable heroes = {heroes}/>
+        <DataTable heroes={heroes}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DataTable />

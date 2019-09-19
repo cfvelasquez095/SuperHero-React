@@ -55,7 +55,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DataTable({heroes, type}) {
+export default function DataTable({heroes}) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -68,60 +68,8 @@ export default function DataTable({heroes, type}) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
-
-  function formatRow(hero){
-    return {id: hero.id, img:<img src= {hero.images.xs}></img>, name: hero.biography.fullName, alias: hero.name,
-      race: hero.race, gender: hero.gender, strength: hero.strength, power: hero.power, int: hero.intelligence, speed: hero.speed}
-  }
-
-  const allHeroes = () => {
-    return heroes ? heroes.map(hero => 
-      formatRow(hero)
-    ) : [];
-  }
-
-  const above60str = () => {
-    return heroes ? heroes.filter(hero => (hero.strength > 60)).map(hero =>
-      formatRow(hero)) 
-    : [];
-  }
-
-  const top10power = () => {
-    return heroes ? heroes.sort((hero1,hero2) => (hero2.power > hero1.power) ? 1 : ((hero1.power > hero2.power) ? -1 : 0)).map(hero =>
-      formatRow(hero)
-    ).slice(0, 10) : [];
-  }
-
-  const above60speedBelow60int = () => {
-    return heroes ? heroes.filter(hero => (hero.speed > 60 && hero.intelligence < 60)).map(hero =>
-      formatRow(hero)
-    ) : [];
-  }
-
-  const top10intHuman = () => {
-    return heroes ? heroes.sort((hero1,hero2) => (hero2.intelligence > hero1.intelligence) ? 1 : ((hero1.power > hero2.power) ? -1 : 0))
-    .filter(hero => (hero.race === 'Human')).map(hero =>
-      formatRow(hero)
-    ).slice(0, 10) : [];
-  }
-
-  const top10speedNonHuman = () => {
-    return heroes ? heroes.filter(hero => (hero.race !== 'Human'))
-    .sort((hero1,hero2) => (hero2.speed > hero1.speed) ? 1 : ((hero1.speed > hero2.speed) ? -1 : 0))
-    .map(hero =>
-      formatRow(hero)
-    ).slice(0, 10) : [];
-  }
-
-  const above80strNonHumanWomen = () => {
-    return heroes ? heroes.filter(hero => (hero.strength > 80 && hero.race !== 'Human' && hero.gender === 'Female')).map(hero =>
-      formatRow(hero)) 
-    : [];
-  }
-
-  const types = {1: allHeroes, 2: above60str, 3: top10power, 4: above60speedBelow60int, 5: top10intHuman, 6: top10speedNonHuman, 7: above80strNonHumanWomen};
-
-  const rows = types[type]();
+  
+  const rows = heroes ? heroes : [];
 
   function generateHeroes(){
     return (
@@ -133,7 +81,7 @@ export default function DataTable({heroes, type}) {
             const value = row[column.id];
             return (
               <TableCell key={column.id} align={column.align}>
-                {column.format && typeof value === 'number' ? column.format(value) : value}
+                {column.id === "img" ? <img src={value} /> : (column.format && typeof value === 'number' ? column.format(value) : value)}
               </TableCell>
             );
           })}

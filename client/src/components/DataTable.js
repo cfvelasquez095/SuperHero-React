@@ -81,7 +81,7 @@ export default function DataTable({heroes}) {
             const value = row[column.id];
             return (
               <TableCell key={column.id} align={column.align}>
-                {column.id === "img" ? <img src={value} /> : (column.format && typeof value === 'number' ? column.format(value) : value)}
+                {column.id === "img" ? <img src={value} alt="hero_img"/> : (column.format && typeof value === 'number' ? column.format(value) : value)}
               </TableCell>
             );
           })}

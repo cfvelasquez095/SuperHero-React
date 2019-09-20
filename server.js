@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000;
 const data = require('./public/heroes.json')
 
 function filter(hero) {
-  let heroes = {
+  const heroes = {
     id: hero.id,
     img: hero.images.xs,
     name: hero.biography.fullName,
